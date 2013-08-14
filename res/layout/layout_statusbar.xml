@@ -50,16 +50,17 @@
 			android:layout_marginTop="50dp"
 			android:textSize="20dp"
 		/>
-
+		
 		<TextView
 			android:id="@+id/tx_time"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="45dp"
-			android:layout_marginRight="325dp"
-			android:layout_alignParentRight="true"
+			android:layout_toLeftOf="@+id/tx_date"
+			android:layout_marginRight="20dp"
 			android:textSize="30dp"
 		/>
+
 		<TextView
 			android:id="@+id/tx_date"
 			android:layout_width="wrap_content"
@@ -69,5 +70,6 @@
 			android:layout_alignParentRight="true"
 			android:textSize="20dp"
 		/>
+	
 	</RelativeLayout>
 	

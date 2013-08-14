@@ -133,7 +133,7 @@ public class MyOnKeyListener implements OnKeyListener{
          scaleAnimationIn.setAnimationListener(new MyAnimationListener(5));
          Launcher.viewMenu.setInAnimation(scaleAnimationIn);
          Launcher.viewMenu.setOutAnimation(scaleAnimationOut);
-         
+
          Launcher.viewHomePage.setVisibility(View.GONE);
          Launcher.viewMenu.setVisibility(View.VISIBLE);
          Launcher.viewMenu.setDisplayedChild(num);
@@ -159,6 +159,7 @@ public class MyOnKeyListener implements OnKeyListener{
          if (Launcher.accessBoundaryCount <= 1)
             return false;
          else {
+            Launcher.dontRunAnim = true;
             Launcher.layoutScaleShadow.setVisibility(View.INVISIBLE);
             Launcher.frameView.setVisibility(View.INVISIBLE);
             return true;
@@ -174,6 +175,8 @@ public class MyOnKeyListener implements OnKeyListener{
         @Override 
         public void onAnimationStart(Animation animation) { 
             Launcher.animIsRun = true;
+            Launcher.layoutScaleShadow.setVisibility(View.INVISIBLE);
+            Launcher.frameView.setVisibility(View.INVISIBLE);
         } 
      
         @Override 

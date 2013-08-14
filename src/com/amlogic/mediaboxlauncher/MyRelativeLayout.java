@@ -44,6 +44,7 @@ public class MyRelativeLayout extends RelativeLayout{
     private float scalePara = 1.1f;
     private float shortcutScalePara = 1.1f;
     private float framePara = 1.08f;
+    private int animDuration = 150;
     private final int MODE_HOME_RECT = 0;
     private final int MODE_HOME_SHORTCUT = 1;
     private final int MODE_CHILD_SHORTCUT = 2;
@@ -140,7 +141,7 @@ public class MyRelativeLayout extends RelativeLayout{
             if (!Launcher.dontRunAnim){
                 ScaleAnimation anim = new ScaleAnimation(1.1f, 1f, 1.1f, 1f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 anim.setZAdjustment(Animation.ZORDER_TOP);
-                anim.setDuration(100);
+                anim.setDuration(animDuration);
                 if (Launcher.isShowHomePage){
                     this.bringToFront();
                     ((View)this.getParent()).bringToFront();
@@ -231,17 +232,17 @@ public class MyRelativeLayout extends RelativeLayout{
         
         AnimationSet animationSet = new AnimationSet(true);
         TranslateAnimation translateAnimation = new TranslateAnimation(0.0f, imgRect.left-preRect.left,0.0f, imgRect.top-preRect.top);
-        translateAnimation.setDuration(100);
+        translateAnimation.setDuration(animDuration);
         ScaleAnimation scaleAnimation = new ScaleAnimation(1f, (float)(imgRect.right-imgRect.left)/(float)(preRect.right-preRect.left), 
                                                               1f, (float)(imgRect.bottom-imgRect.top)/(float)(preRect.bottom-preRect.top));
                                                              //   Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f );
-        scaleAnimation.setDuration(120);
+        scaleAnimation.setDuration(animDuration);
         animationSet.addAnimation(scaleAnimation);
         animationSet.addAnimation(translateAnimation);
         translateAnimation.setAnimationListener(new TransAnimationListener(mContext, this, scaleAnimation));
 
         ScaleAnimation shadowAnim = new ScaleAnimation(0.9f, 1f, 0.9f, 1f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f );
-        shadowAnim.setDuration(100);
+        shadowAnim.setDuration(animDuration);
        // shadowAnim.setAnimationListener(new ScaleAnimationListener());
         
         Launcher.layoutScaleShadow.startAnimation(shadowAnim); 
