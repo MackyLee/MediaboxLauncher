@@ -122,7 +122,7 @@ public class MyRelativeLayout extends RelativeLayout{
                     
                     setShadowEffect();
                     startFrameAnim(preRect);    
-                } else {
+                } else if(!(Launcher.IntoCustomActivity && Launcher.isShowHomePage)){
                     Launcher.dontRunAnim = false;
                     setSurface();
                 }
@@ -142,7 +142,7 @@ public class MyRelativeLayout extends RelativeLayout{
                 ScaleAnimation anim = new ScaleAnimation(1.1f, 1f, 1.1f, 1f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 anim.setZAdjustment(Animation.ZORDER_TOP);
                 anim.setDuration(animDuration);
-                if (Launcher.isShowHomePage){
+                if (!(this.getParent() instanceof MyGridLayout)){
                     this.bringToFront();
                     ((View)this.getParent()).bringToFront();
                     Launcher.viewHomePage.bringToFront();
@@ -287,8 +287,16 @@ public class MyRelativeLayout extends RelativeLayout{
         ImageView img = (ImageView)(mView.getChildAt(0));
         img.buildDrawingCache();
         Bitmap bmp = img.getDrawingCache();
+        if (bmp == null){
+            Launcher.cantGetDrawingCache = true;
+            return;
+        } else {
+            Launcher.cantGetDrawingCache = false;
+        }
+        
         scaleBitmap = zoomBitmap(bmp, (int)(imgRect.width()*bgScalePara),(int)(imgRect.height()*bgScalePara));
-            
+        img.destroyDrawingCache();  
+        
         if (mView.getChildAt(1) instanceof TextView){
             text = (String)((TextView)mView.getChildAt(1)).getText();
         }

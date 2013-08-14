@@ -95,7 +95,8 @@ public class Launcher extends Activity{
     public static boolean IntoApps;
     public static boolean isAddButtonBeTouched;
     public static boolean isInTouchMode;
-    public static boolean animIsRun = false;
+    public static boolean animIsRun;
+    public static boolean cantGetDrawingCache;
     public static int accessBoundaryCount = 0;
     public static int preDec;
     public static int HOME_SHORTCUT_COUNT = 9;
@@ -127,11 +128,10 @@ public class Launcher extends Activity{
     private String[] list_localShortcut;
     
     private boolean is24hFormart = false;
-    private static boolean APK_run_first_time = true;
     private int popWindow_top = -1;
     private int popWindow_bottom = -1;
     public static float startX;
-    private static boolean updateAllShortcut = true;
+    private static boolean updateAllShortcut;
     private static boolean checkOobe = true;
 
     @Override
@@ -207,8 +207,9 @@ public class Launcher extends Activity{
 	    filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
 		filter.addDataScheme("package");
 	    registerReceiver(appReceiver, filter);
-
-        if (isInTouchMode){
+        
+        if (isInTouchMode || (IntoCustomActivity && isShowHomePage)){
+            Launcher.dontRunAnim = true;
             layoutScaleShadow.setVisibility(View.INVISIBLE);
             frameView.setVisibility(View.INVISIBLE);
         }
@@ -219,6 +220,10 @@ public class Launcher extends Activity{
 
        if (isShowHomePage){
             IntoCustomActivity = false;
+       }
+
+       if (cantGetDrawingCache){
+           resetShadow();
        }
     }
     @Override
@@ -364,6 +369,9 @@ public class Launcher extends Activity{
         isAddButtonBeTouched = false;
         isInTouchMode = false;
         animIsRun = false;
+        updateAllShortcut = true;
+        animIsRun = false;
+        cantGetDrawingCache = false;
     }
     
     private void initChildViews(){
@@ -411,13 +419,33 @@ public class Launcher extends Activity{
     }
 
     private void displayShortcuts() {       
-        if (ifChangedShortcut == true){       
+        if (ifChangedShortcut == true){            
             loadApplications();
             ifChangedShortcut = false;      
       
             if (!isShowHomePage){
-                sendKeyCode(KeyEvent.KEYCODE_0);
-            } 
+                //sendKeyCode(KeyEvent.KEYCODE_0);
+                new Thread( new Runnable() {     
+                    public void run() {
+                        ViewGroup findGridLayout = null;
+                        while(findGridLayout == null){
+                            findGridLayout = ((ViewGroup)((ViewGroup)((ViewGroup)viewMenu.getCurrentView()).getChildAt(4)).getChildAt(0));
+                        }
+                        mHandler.sendEmptyMessage(3);
+                    }            
+                }).start();  
+            } else  if(IntoCustomActivity){
+                new Thread( new Runnable() {     
+                    public void run() {
+                         try{
+                            Thread.sleep(200);
+                        } catch (Exception e) {
+            			    Log.d(TAG,""+e);
+            		    }
+                        mHandler.sendEmptyMessage(4);
+                    }            
+                }).start(); 
+            }
         }
 	}
 
@@ -830,6 +858,7 @@ public class Launcher extends Activity{
         view.layout(0, 0, 1279, SCREEN_HEIGHT);  
         view.setDrawingCacheEnabled(true);
         Bitmap bmp = Bitmap.createBitmap(view.getDrawingCache());
+        view.destroyDrawingCache();
         Log.d(TAG, "@@@@@@@@@@@@@@@@@@ window height="+ display.getHeight());
 
         if (bottom > SCREEN_HEIGHT/2){  
@@ -991,7 +1020,7 @@ public class Launcher extends Activity{
         return -1;
     }
 
-   private void sendKeyCode(final int keyCode){  
+    private void sendKeyCode(final int keyCode){  
         new Thread () {  
             public void run() {  
                 try {  
@@ -1003,12 +1032,46 @@ public class Launcher extends Activity{
             }  
         }.start();  
     }  
+    
+    private void resetShadow(){
+        new Thread( new Runnable() {     
+            public void run() {
+                try{
+                    Thread.sleep(500);
+                } catch (Exception e) {
+    			    Log.d(TAG,""+e);
+    		    }
+            	//Message msg = new Message();
+                //msg.what = 2;
+                mHandler.sendEmptyMessage(2);
+            }            
+        }).start();  
+   }
 
     private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch(msg.what) {
 				case 1:
 					setPopWindow(popWindow_top, popWindow_bottom);
+					break;
+                case 2:
+					MyRelativeLayout view = (MyRelativeLayout)getCurrentFocus();
+                    view.setSurface();
+					break;
+                case 3:
+                    ViewGroup findGridLayout = ((ViewGroup)((ViewGroup)((ViewGroup)viewMenu.getCurrentView()).getChildAt(4)).getChildAt(0));
+                    int count = findGridLayout.getChildCount();
+                    Launcher.dontRunAnim = true;
+                    findGridLayout.getChildAt(count-1).requestFocus();
+                    Launcher.dontRunAnim = false;
+					break;
+                case 4:
+                    int i = homeShortcutView.getChildCount();
+                    Launcher.dontRunAnim = true;
+                    homeShortcutView.getChildAt(i-1).requestFocus();
+                    Launcher.dontRunAnim = false;
+                    layoutScaleShadow.setVisibility(View.VISIBLE);
+                    frameView.setVisibility(View.VISIBLE);
 					break;
 				default:	
                     break;      
