@@ -208,7 +208,7 @@ public class Launcher extends Activity{
 		filter.addDataScheme("package");
 	    registerReceiver(appReceiver, filter);
         
-        if (isInTouchMode || (IntoCustomActivity && isShowHomePage)){
+        if (isInTouchMode || (IntoCustomActivity && isShowHomePage && ifChangedShortcut)){
             Launcher.dontRunAnim = true;
             layoutScaleShadow.setVisibility(View.INVISIBLE);
             frameView.setVisibility(View.INVISIBLE);

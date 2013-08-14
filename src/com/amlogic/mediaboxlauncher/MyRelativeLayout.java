@@ -122,7 +122,7 @@ public class MyRelativeLayout extends RelativeLayout{
                     
                     setShadowEffect();
                     startFrameAnim(preRect);    
-                } else if(!(Launcher.IntoCustomActivity && Launcher.isShowHomePage)){
+                } else if(!(Launcher.IntoCustomActivity && Launcher.isShowHomePage && Launcher.ifChangedShortcut)){
                     Launcher.dontRunAnim = false;
                     setSurface();
                 }
