@@ -160,6 +160,7 @@ public class MyOnKeyListener implements OnKeyListener{
             return false;
          else {
             Launcher.dontRunAnim = true;
+            Launcher.animIsRun = true;
             Launcher.layoutScaleShadow.setVisibility(View.INVISIBLE);
             Launcher.frameView.setVisibility(View.INVISIBLE);
             return true;
@@ -174,7 +175,6 @@ public class MyOnKeyListener implements OnKeyListener{
      
         @Override 
         public void onAnimationStart(Animation animation) { 
-            Launcher.animIsRun = true;
             Launcher.layoutScaleShadow.setVisibility(View.INVISIBLE);
             Launcher.frameView.setVisibility(View.INVISIBLE);
         } 
@@ -190,8 +190,6 @@ public class MyOnKeyListener implements OnKeyListener{
                     findGridLayout.getChildAt(count).requestFocus();   
                     Launcher.dontRunAnim = false;
                 }
-                Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
-                Launcher.frameView.setVisibility(View.VISIBLE);
                 //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ count="+ ((ViewGroup)((ViewGroup)((ViewGroup)Launcher.viewMenu.getCurrentView()).getChildAt(4)).getChildAt(0)).getChildCount());    
             } else if(in_or_out == 3){
                // Launcher.dontDrawFocus = false;  
@@ -200,18 +198,16 @@ public class MyOnKeyListener implements OnKeyListener{
                 Launcher.dontRunAnim = true;
                 Launcher.viewMenu.requestFocus();
                 Launcher.dontRunAnim = false;
-                Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
-                Launcher.frameView.setVisibility(View.VISIBLE);
             } else if(in_or_out == 5){
                 Launcher.dontRunAnim = true;
                 Launcher.viewMenu.clearFocus();
                 Launcher.dontRunAnim = true;
                 Launcher.viewMenu.requestFocus();   
                 Launcher.dontRunAnim = false;
-                Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
-                Launcher.frameView.setVisibility(View.VISIBLE);
             }
             Launcher.animIsRun = false;
+            Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
+            Launcher.frameView.setVisibility(View.VISIBLE);
         } 
      
         @Override 

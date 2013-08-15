@@ -44,7 +44,7 @@ public class MyRelativeLayout extends RelativeLayout{
     private float scalePara = 1.1f;
     private float shortcutScalePara = 1.1f;
     private float framePara = 1.08f;
-    private int animDuration = 150;
+    private int animDuration = 110;
     private final int MODE_HOME_RECT = 0;
     private final int MODE_HOME_SHORTCUT = 1;
     private final int MODE_CHILD_SHORTCUT = 2;
@@ -203,8 +203,10 @@ public class MyRelativeLayout extends RelativeLayout{
         @Override 
         public void onAnimationEnd(Animation animation) { 
             scaleAnim.reset();   
-            Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
-            Launcher.frameView.setVisibility(View.VISIBLE);
+            if (!Launcher.animIsRun){
+                Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
+                Launcher.frameView.setVisibility(View.VISIBLE);
+            }
         } 
      
         @Override 
@@ -251,8 +253,10 @@ public class MyRelativeLayout extends RelativeLayout{
     
     public void setSurface(){
         setShadowEffect();
-        Launcher.frameView.setVisibility(View.VISIBLE);
-        Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
+        if (!Launcher.animIsRun){
+            Launcher.frameView.setVisibility(View.VISIBLE);
+            Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setShadowEffect(){
@@ -266,9 +270,10 @@ public class MyRelativeLayout extends RelativeLayout{
         int screen_mode;
         String text = null;
 
+        Launcher.trans_frameView.bringToFront();
         Launcher.layoutScaleShadow.bringToFront();
         Launcher.frameView.bringToFront();
-        Launcher.trans_frameView.bringToFront();
+        
 
         imgRect = new Rect();
         mView.getGlobalVisibleRect(imgRect);
