@@ -775,7 +775,7 @@ public class Launcher extends Activity{
     				map.put("file_path", application.intent); 		   
     				map.put("item_type", application.icon);
                     map.put("item_symbol", application.componentName); 
-                  // Log.d(TAG, ""+ application.componentName.getPackageName());
+                    Log.d(TAG, ""+ application.componentName.getPackageName() + " path="+application.intent);
                     appShortCutList.add(map);  
                 }
             }

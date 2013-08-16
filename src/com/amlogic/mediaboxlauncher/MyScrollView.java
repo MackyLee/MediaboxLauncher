@@ -28,10 +28,17 @@ public class MyScrollView extends ScrollView{
         mContext = context;
     }
    
-
     @Override
     public boolean onTouchEvent (MotionEvent event){
         Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch ="+ this);
         return false;       
     }
+
+    @Override
+    public boolean onGenericMotionEvent(MotionEvent event)
+	{
+        Launcher.layoutScaleShadow.setVisibility(View.INVISIBLE);
+        Launcher.frameView.setVisibility(View.INVISIBLE);
+		return super.onGenericMotionEvent(event);
+	}
 }
