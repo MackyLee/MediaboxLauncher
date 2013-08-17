@@ -24,7 +24,7 @@
         <activity
             android:label="@string/app_name"
             android:name=".Launcher" >
-            <intent-filter android:priority="4">
+            <intent-filter >
   				 <action android:name="android.intent.action.MAIN" />
                  <category android:name="android.intent.category.HOME" /> 
  				 <category android:name="android.intent.category.DEFAULT" /> 
