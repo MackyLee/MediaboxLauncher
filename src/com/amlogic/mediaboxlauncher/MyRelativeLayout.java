@@ -220,7 +220,10 @@ public class MyRelativeLayout extends RelativeLayout{
         } 
         @Override 
         public void onAnimationEnd(Animation animation) { 
-            Launcher.frameView.setVisibility(View.VISIBLE);
+            if (!Launcher.animIsRun){
+                Launcher.layoutScaleShadow.setVisibility(View.VISIBLE);
+                Launcher.frameView.setVisibility(View.VISIBLE);
+            }
         } 
         @Override 
         public void onAnimationRepeat(Animation animation) { 
@@ -245,7 +248,7 @@ public class MyRelativeLayout extends RelativeLayout{
 
         ScaleAnimation shadowAnim = new ScaleAnimation(0.9f, 1f, 0.9f, 1f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f );
         shadowAnim.setDuration(animDuration);
-       // shadowAnim.setAnimationListener(new ScaleAnimationListener());
+        //shadowAnim.setAnimationListener(new ScaleAnimationListener());
         
         Launcher.layoutScaleShadow.startAnimation(shadowAnim); 
         Launcher.trans_frameView.startAnimation(animationSet); 

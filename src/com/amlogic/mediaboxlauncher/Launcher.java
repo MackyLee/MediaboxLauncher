@@ -143,30 +143,15 @@ public class Launcher extends Activity{
         if (DesUtils.isAmlogicChip() == false){
             finish();
         }
-        
-        if(checkOobe){
-            checkOobe = false ;
-			enableOOBE();
-        }
 
         initStaticVariable();
         initChildViews();   
         //displayShortcuts();
-        displayStatus();  
-        displayDate();
+       // displayStatus();  
+       // displayDate();
         setRectOnKeyListener();
         sendWeatherBroadcast();
     }
-
-    
-    private void enableOOBE() {
-        if(isNeedStartOobe()){
-            Intent i = new Intent();
-            ComponentName name = new ComponentName("com.mbx.settingsmbox", "com.mbx.settingsmbox.OobeActivity");
-            i.setComponent(name);
-            startActivity(i);
-        }
-	}
 
     private boolean isNeedStartOobe(){       		
         SystemWriteManager sw = (SystemWriteManager)getSystemService("system_write");
