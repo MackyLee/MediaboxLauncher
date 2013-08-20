@@ -129,7 +129,7 @@ public class MyRelativeLayout extends RelativeLayout{
                 
             } else{
                     //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ isShowHomePage ="+ Launcher.isShowHomePage + " dontRunAnim="+Launcher.dontRunAnim + 
-                                                            " IntoCustomActivity=" + Launcher.IntoCustomActivity);
+                    //                                        " IntoCustomActivity=" + Launcher.IntoCustomActivity);
                 if (Launcher.isShowHomePage || Launcher.dontRunAnim || Launcher.IntoCustomActivity){
                     Launcher.IntoCustomActivity = false;
                     setSurface();
