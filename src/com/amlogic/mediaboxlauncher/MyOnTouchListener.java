@@ -49,7 +49,7 @@ public class MyOnTouchListener implements OnTouchListener{
             String path  = img.getResources().getResourceName(img.getId()); 
             String vName = path.substring(path.indexOf("/")+1);
 
-            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ACTION_UP");
+           // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ACTION_UP");
 
             // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@ viewname=" + vName);
             if (vName.equals("img_setting")){

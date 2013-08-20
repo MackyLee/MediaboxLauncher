@@ -50,7 +50,7 @@ public class MyViewFlipper extends ViewFlipper{
 
     @Override
     public boolean onTouchEvent (MotionEvent event){
-        Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch ="+ this);
+        //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch ="+ this);
         return false;       
     }
 }

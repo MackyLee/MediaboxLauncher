@@ -379,7 +379,7 @@ public class CustomAppsActivity extends Activity {
             String str = null;
             while( (str=br.readLine()) != null ){
                 if (str.startsWith(shortcut_head)){                  
-                    Log.d(TAG, "@@@@@@@@@@@@@@@@@@ get CustomApps" + str);
+                    //Log.d(TAG, "@@@@@@@@@@@@@@@@@@ get CustomApps" + str);
                     break;
                 } 
             }
@@ -422,17 +422,17 @@ public class CustomAppsActivity extends Activity {
                 list.add(MUSIC_SHORTCUT_HEAD);
                 list.add(LOCAL_SHORTCUT_HEAD);
             }
-            Log.d(TAG, "@@@@@@@@@@@@@ size" + list.size());
+            //Log.d(TAG, "@@@@@@@@@@@@@ size" + list.size());
                  
             BufferedWriter bw = new BufferedWriter(new FileWriter(mFile));
             for( int i = 0;i < list.size(); i++ ){
                  if (list.get(i).toString().startsWith(current_shortcutHead)){
                     str_apps = current_shortcutHead + str_apps;
                     bw.write(str_apps);
-                    Log.d(TAG, "@@@@@@@@@@@@@@@@@@ wirte " + str_apps);
+                    //Log.d(TAG, "@@@@@@@@@@@@@@@@@@ wirte " + str_apps);
                  } else {          
                     bw.write(list.get(i).toString());
-                    Log.d(TAG, "@@@@@@@@@@@@@@@@@@ wirte " + list.get(i).toString());
+                    //Log.d(TAG, "@@@@@@@@@@@@@@@@@@ wirte " + list.get(i).toString());
                  }
                  bw.newLine();
             }

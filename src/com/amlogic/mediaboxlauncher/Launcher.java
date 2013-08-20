@@ -76,7 +76,7 @@ public class Launcher extends Activity{
     private final String weather_request_action = "android.amlogic.launcher.REQUEST_WEATHER";
     private final String weather_receive_action = "android.amlogic.settings.WEATHER_INFO";
     private static int time_count = 0;
-    private final int time_freq = 120;
+    private final int time_freq = 180;
     private final int SCREEN_HEIGHT = 719;
 
     public static View prevFocusedView;
@@ -230,7 +230,7 @@ public class Launcher extends Activity{
          if (event.getAction() == MotionEvent.ACTION_DOWN){
             startX = event.getX();
          } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch ="+ this);
+            //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch ="+ this);
             if (pressedAddButton != null && isAddButtonBeTouched){
                 Rect rect = new Rect();
                 pressedAddButton.getGlobalVisibleRect(rect);
@@ -253,7 +253,7 @@ public class Launcher extends Activity{
                 isAddButtonBeTouched = false;
             }
             else if (!isShowHomePage){
-                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@ getX = " +event.getX() + " startX = " + startX);
+               // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@ getX = " +event.getX() + " startX = " + startX);
                 if (event.getX() + 20 < startX && startX != -1f) {           
                     viewMenu.setInAnimation(this, R.anim.push_right_in);
                     viewMenu.setOutAnimation(this, R.anim.push_right_out);
@@ -646,7 +646,7 @@ public class Launcher extends Activity{
            int bytesum = 0;   
            int byteread = 0;   
            File oldfile = new File(oldPath); 
-           Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@ copy file");
+        //   Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@ copy file");
            if (!oldfile.exists()) {
                InputStream inStream = new FileInputStream(oldPath); 
                FileOutputStream fs = new FileOutputStream(newPath);   
@@ -760,7 +760,7 @@ public class Launcher extends Activity{
     				map.put("file_path", application.intent); 		   
     				map.put("item_type", application.icon);
                     map.put("item_symbol", application.componentName); 
-                    Log.d(TAG, ""+ application.componentName.getPackageName() + " path="+application.intent);
+                    //Log.d(TAG, ""+ application.componentName.getPackageName() + " path="+application.intent);
                     appShortCutList.add(map);  
                 }
             }
@@ -844,7 +844,7 @@ public class Launcher extends Activity{
         view.setDrawingCacheEnabled(true);
         Bitmap bmp = Bitmap.createBitmap(view.getDrawingCache());
         view.destroyDrawingCache();
-        Log.d(TAG, "@@@@@@@@@@@@@@@@@@ window height="+ display.getHeight());
+      //  Log.d(TAG, "@@@@@@@@@@@@@@@@@@ window height="+ display.getHeight());
 
         if (bottom > SCREEN_HEIGHT/2){  
             if (top+3-CustomAppsActivity.CONTENT_HEIGHT > 0){
@@ -866,7 +866,7 @@ public class Launcher extends Activity{
         Intent intent =new Intent();
         intent.setAction(weather_request_action);
         sendBroadcast(intent);
-        Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@      send weather broadcast: "+weather_request_action);
+       // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@      send weather broadcast: "+weather_request_action);
     }
 
     private void setWeatherView(String str_weather){
@@ -1101,7 +1101,7 @@ public class Launcher extends Activity{
 				}
 			} else if (action.equals(weather_receive_action)) {
 			    String weatherInfo = intent.getExtras().getString("weather_today");
-                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@ receive " + action + " weather:" + weatherInfo);
+                //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@ receive " + action + " weather:" + weatherInfo);
                 setWeatherView(weatherInfo);
             } 
             else {

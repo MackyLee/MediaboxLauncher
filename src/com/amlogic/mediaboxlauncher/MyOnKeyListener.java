@@ -43,7 +43,7 @@ public class MyOnKeyListener implements OnKeyListener{
         
         if(keyCode!= KeyEvent.KEYCODE_BACK)
             Launcher.isInTouchMode = false;      
-        Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@ KeyEvent=" + keyCode);
+       // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@ KeyEvent=" + keyCode);
         
         if(event.getAction() == KeyEvent.ACTION_DOWN && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
                                                            keyCode == KeyEvent.KEYCODE_ENTER )){
@@ -181,7 +181,7 @@ public class MyOnKeyListener implements OnKeyListener{
      
         @Override 
         public void onAnimationEnd(Animation animation) { 
-            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ flag="+ in_or_out);
+           // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ flag="+ in_or_out);
             if (in_or_out == 1){    
                 if (((ViewGroup)Launcher.viewMenu.getCurrentView()).getChildAt(4) instanceof MyScrollView){
                     ViewGroup findGridLayout = ((ViewGroup)((ViewGroup)((ViewGroup)Launcher.viewMenu.getCurrentView()).getChildAt(4)).getChildAt(0));

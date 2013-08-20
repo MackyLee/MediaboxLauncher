@@ -73,7 +73,7 @@ public class MyRelativeLayout extends RelativeLayout{
         setAddShortcutHead();
         setNumberOfScreen();
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch ="+ this + " startX=" + event.getX());  
+           // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch ="+ this + " startX=" + event.getX());  
             Launcher.startX = -1f;
 
             setSurface();
@@ -83,13 +83,13 @@ public class MyRelativeLayout extends RelativeLayout{
               //  Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ img ="+ img + "img.getDrawable()="+ img.getDrawable());
                 if(img != null && img.getDrawable() != null &&
                             img.getDrawable().getConstantState().equals(mContext.getResources().getDrawable(R.drawable.item_img_add).getConstantState())){
-                    Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch add");
+                    //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch add");
                     Launcher.isAddButtonBeTouched = true;
                     Launcher.pressedAddButton = this;
                 }
             }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ACTION_UP");
+            //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ACTION_UP");
             return false;
         }
         return true;       
@@ -105,15 +105,15 @@ public class MyRelativeLayout extends RelativeLayout{
           
         if (gainFocus == true && !Launcher.isInTouchMode && !Launcher.dontDrawFocus){ 
             setNumberOfScreen();
-            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getfocus ="+ this);
+            //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getfocus ="+ this);
          //   Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getParent="+ this.getParent());
             
             if (Launcher.prevFocusedView != null && (isParentSame(this,Launcher.prevFocusedView)
                                                                     || Launcher.isShowHomePage)){
-                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ isShowHomePage ="+ Launcher.isShowHomePage + " isParentSame="+isParentSame(this, Launcher.prevFocusedView));
+                //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ isShowHomePage ="+ Launcher.isShowHomePage + " isParentSame="+isParentSame(this, Launcher.prevFocusedView));
 
                 if (!Launcher.dontRunAnim && !Launcher.IntoCustomActivity){
-                    Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ dontRunAnim ="+ Launcher.dontRunAnim + " IntoCustomActivity="+Launcher.IntoCustomActivity);
+                    //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ dontRunAnim ="+ Launcher.dontRunAnim + " IntoCustomActivity="+Launcher.IntoCustomActivity);
                     Launcher.frameView.setVisibility(View.INVISIBLE);
                     Launcher.layoutScaleShadow.setVisibility(View.INVISIBLE);
                     
@@ -128,7 +128,7 @@ public class MyRelativeLayout extends RelativeLayout{
                 }
                 
             } else{
-                    Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ isShowHomePage ="+ Launcher.isShowHomePage + " dontRunAnim="+Launcher.dontRunAnim + 
+                    //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ isShowHomePage ="+ Launcher.isShowHomePage + " dontRunAnim="+Launcher.dontRunAnim + 
                                                             " IntoCustomActivity=" + Launcher.IntoCustomActivity);
                 if (Launcher.isShowHomePage || Launcher.dontRunAnim || Launcher.IntoCustomActivity){
                     Launcher.IntoCustomActivity = false;
