@@ -55,6 +55,7 @@ public class MyOnKeyListener implements OnKeyListener{
 
                // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@ viewname=" + vName);
                 if (vName.equals("img_setting")){
+                    Launcher.saveHomeFocusView = view;
                     Intent intent = new Intent();
                     intent .setComponent(new ComponentName("com.mbx.settingsmbox", "com.mbx.settingsmbox.SettingsMboxActivity"));     
 				    mContext.startActivity(intent);
@@ -76,7 +77,10 @@ public class MyOnKeyListener implements OnKeyListener{
                     showMenuView(NUM_LOCAL, view);
                     return true;
                 }else {
-                    if (appPath != null){                                      
+                    if (appPath != null){  
+                        if (Launcher.isShowHomePage){
+                            Launcher.saveHomeFocusView = view;
+                        }
                         mContext.startActivity((Intent)appPath);
                         Launcher.IntoApps = true;
                     }

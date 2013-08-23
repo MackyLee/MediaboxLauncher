@@ -23,7 +23,10 @@
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         <activity
             android:label="@string/app_name"
-            android:name=".Launcher" >
+            android:name=".Launcher"
+            android:launchMode="singleTask"
+            android:clearTaskOnLaunch="true"
+            android:stateNotNeeded="true">
             <intent-filter >
   				 <action android:name="android.intent.action.MAIN" />
                  <category android:name="android.intent.category.HOME" /> 

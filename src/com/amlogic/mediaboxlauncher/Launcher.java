@@ -151,28 +151,8 @@ public class Launcher extends Activity{
        // displayDate();
         setRectOnKeyListener();
         sendWeatherBroadcast();
-    }
 
-    private boolean isNeedStartOobe(){       		
-        SystemWriteManager sw = (SystemWriteManager)getSystemService("system_write");
-        String prop  = sw.getPropertyString("persist.sys.oobe.start", "true");
-        return "true".equals(prop);
-    }
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.d(TAG, "------onResume");
-
-        if(SystemProperties.getBoolean("ro.platform.has.mbxuimode", false)){
-            if(SystemProperties.getBoolean("ubootenv.var.has.accelerometer", true)
-                            && SystemProperties.getBoolean("sys.keeplauncher.landcape", false))
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            else
-               setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-         }
-
-		IntentFilter filter = new IntentFilter();
+        IntentFilter filter = new IntentFilter();
 		filter.addAction(Intent.ACTION_MEDIA_EJECT);
 		filter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
 		filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
@@ -192,6 +172,20 @@ public class Launcher extends Activity{
 	    filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
 		filter.addDataScheme("package");
 	    registerReceiver(appReceiver, filter);
+    }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "------onResume");
+
+        if(SystemProperties.getBoolean("ro.platform.has.mbxuimode", false)){
+            if(SystemProperties.getBoolean("ubootenv.var.has.accelerometer", true)
+                            && SystemProperties.getBoolean("sys.keeplauncher.landcape", false))
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            else
+               setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+         }
         
         if (isInTouchMode || (IntoCustomActivity && isShowHomePage && ifChangedShortcut)){
             Launcher.dontRunAnim = true;
@@ -218,12 +212,32 @@ public class Launcher extends Activity{
         prevFocusedView = null;
 	}
 
+    @Override
     protected void onDestroy(){
         unregisterReceiver(mediaReceiver);
 		unregisterReceiver(netReceiver);
 	    unregisterReceiver(appReceiver);
 	    super.onDestroy();
 	}
+    
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (Intent.ACTION_MAIN.equals(intent.getAction())) {
+            //Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ HOME");
+            viewHomePage.setVisibility(View.VISIBLE);
+            viewMenu.setVisibility(View.GONE);
+            isShowHomePage = true;
+            IntoCustomActivity = false;
+            if (saveHomeFocusView != null  && !isInTouchMode){
+                prevFocusedView = null;
+                dontRunAnim = true;
+                saveHomeFocusView.clearFocus();
+                dontRunAnim = true;
+                saveHomeFocusView.requestFocus();
+            } 
+        }
+    }
 
     @Override
     public boolean onTouchEvent (MotionEvent event){ 
@@ -267,10 +281,10 @@ public class Launcher extends Activity{
         }       
         return true;       
     }
-
+    
 	public boolean onKeyDown(int keyCode, KeyEvent event) {  
     	if(keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@ KEYCODE_BACK");
+           // Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@ KEYCODE_BACK");
             if (!isShowHomePage){
                 viewHomePage.setVisibility(View.VISIBLE);
                 viewMenu.setVisibility(View.GONE);
