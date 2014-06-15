@@ -4,10 +4,10 @@
     <string name="hello">Hello World</string>
     <string name="app_name">KimBox launcher</string>
     <string name="str_video">Online Video </string>
-    <string name="str_recommend">OnLine TV</string>
+    <string name="str_onlinetv">Game Center</string>
     <string name="str_setting">Setting</string>
     <string name="str_app">My Apps</string>
-    <string name="str_music">Music</string>
+    <string name="str_web">Web browser</string>
     <string name="str_local">Video</string>
     <string name="str_nospace">Shortcuts no space!</string>
 	<string name="str_day">日</string>

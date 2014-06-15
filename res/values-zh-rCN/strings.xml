@@ -4,10 +4,10 @@
     <string name="hello">Hello World</string>
     <string name="app_name">Kim Box启动器</string>
     <string name="str_video">在线视频</string>
-    <string name="str_recommend">电视直播</string>
+    <string name="str_onlinetv">游戏中心</string>
     <string name="str_setting">设置</string>
     <string name="str_app">我的应用</string>
-    <string name="str_music">音乐</string>
+    <string name="str_web">网页浏览</string>
     <string name="str_local">本地视频</string>
 	<string name="str_nospace">快捷栏没有空间了！</string>
 

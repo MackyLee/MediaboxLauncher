@@ -7,6 +7,8 @@
     android:visibility="gone">
     
     <include layout="@layout/layout_video" />    
+    <include layout="@layout/layout_onlinetv" />
     <include layout="@layout/layout_app" />
+    <include layout="@layout/layout_market" />
 
 </com.boxchiptv.mediaboxlauncher.MyViewFlipper>

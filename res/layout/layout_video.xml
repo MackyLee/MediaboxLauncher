@@ -9,16 +9,9 @@
 		android:layout_height="wrap_content"   
 		android:layout_marginTop="49dp"
 		android:layout_marginLeft="172dp"
-		android:src="@drawable/video"
+		android:src="@drawable/web"
 	/>
-    <TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"   
-		android:layout_marginTop="60dp"
-		android:layout_marginLeft="230dp"
-		android:text="@string/str_video"
-		android:textSize="30dp"
-	/>
+
 	<TextView
 		android:id="@+id/tx_video_allcount"
 		android:layout_width="wrap_content"
@@ -37,12 +30,14 @@
 		android:textSize="20dp"
 		android:textColor="#3495D9" 
 	/>
+
     <com.boxchiptv.mediaboxlauncher.MyScrollView
-	    android:layout_width="976dp"
+        android:id="@+id/MyScrollView_Video"
+        android:layout_width="976dp"
         android:layout_height="460dp"
         android:layout_marginLeft="170dp"
-	    android:layout_marginTop="116dp" 
-	    android:descendantFocusability="afterDescendants">
+        android:layout_marginTop="116dp"
+        android:descendantFocusability="afterDescendants" >
 
 		<com.boxchiptv.mediaboxlauncher.MyGridLayout
 			android:id="@+id/gv_shortcut_video"
@@ -60,7 +55,7 @@
 		android:layout_height="wrap_content"   
 		android:layout_marginTop="638dp"
 		android:layout_centerHorizontal="true"
-		android:src="@drawable/prompt_video"
+		android:src="@drawable/prompt_web"
 	/>
 </RelativeLayout>
 

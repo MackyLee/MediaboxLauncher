@@ -10,12 +10,13 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:descendantFocusability="afterDescendants"
-	>
+	 >   
 		<include layout="@layout/layout_statusbar" />
 		<include layout="@layout/layout_rect_group" />
 		<include layout="@layout/layout_shortcut" />
 	</RelativeLayout>
 
+	
 	<include layout="@layout/layout_view_flipper" />
 
 	
