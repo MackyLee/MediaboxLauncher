@@ -42,8 +42,8 @@ public class MyOnTouchListener implements OnTouchListener
 
 			// Log.d(TAG, "mContext	 = "+ mContext.toString());
 			// Log.d(TAG, "this   		 = "+ this.toString());
-			// Log.d(TAG, "view         = "+ view.toString());
-			// Log.d(TAG, "viewParent   ="+view.getParent().toString());
+			 Log.d(TAG, "view         = "+ view.toString());
+			 Log.d(TAG, "viewParent   ="+view.getParent().toString());
 
 			if(vName.equals("img_setting"))
 			{
@@ -161,7 +161,7 @@ public class MyOnTouchListener implements OnTouchListener
 		Launcher.viewMenu.setVisibility(View.VISIBLE);
 		Launcher.viewMenu.setDisplayedChild(num);
 		Launcher.viewMenu.setFocusableInTouchMode(true);
-		Log.d(TAG, "Launcher.viewMenu="+Launcher.viewMenu.toString()+"MenuNumber="+num);
+		//Log.d(TAG, "Launcher.viewMenu="+Launcher.viewMenu.toString()+"MenuNumber="+num);
 	}
 
 	private float getPiovtX(Rect rect)

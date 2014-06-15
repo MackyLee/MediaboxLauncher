@@ -374,7 +374,7 @@ public class Launcher extends Activity
 					intent.putExtra("left", rect.left);
 					intent.putExtra("right", rect.right);
 					intent.setClass(this, CustomAppsActivity.class);
-					startActivity(intent);
+					startActivity(intent);//go to custom activity
 					IntoCustomActivity = true;
 					if(saveHomeFocusView != null)
 					{
@@ -488,14 +488,13 @@ public class Launcher extends Activity
 						while (findGridLayout == null)
 						{
 							try
-							{
-								//findGridLayout = ((ViewGroup) ((ViewGroup) ((ViewGroup) viewMenu.getCurrentView()).getChildAt(4)).getChildAt(0));
-								findGridLayout = ((ViewGroup) ((ViewGroup) ((ViewGroup) viewMenu.getCurrentView()).getChildAt(4)).getChildAt(0));
+							{   
+			//get viewgroup in myfillper - crrent view/com.boxchiptv.mediaboxlauncher.MyScrollView/om.boxchiptv.mediaboxlauncher.MyGridLayout
+								findGridLayout = ((ViewGroup) ((ViewGroup) ((ViewGroup) viewMenu.getCurrentView()).getChildAt(3)).getChildAt(0));
 							} catch (Exception e)
 							{
 								Log.d(TAG, "DisplayShortcuts " + e);
 							}
-
 						}
 						//if findGridLayout.getcl
 						mHandler.sendEmptyMessage(3);
@@ -758,9 +757,9 @@ public class Launcher extends Activity
 					str = str.toString().replaceAll(CustomAppsActivity.LOCAL_SHORTCUT_HEAD, "");
 					list_localShortcut = str.split(";");
 				}
-				else if(str.toString().startsWith(CustomAppsActivity.MARKET_SHORTCUT_HEAD))
+				else if(str.startsWith(CustomAppsActivity.MARKET_SHORTCUT_HEAD))
 				{
-					str = str.toString().replaceAll(CustomAppsActivity.MARKET_SHORTCUT_HEAD, "");
+					str = str.replaceAll(CustomAppsActivity.MARKET_SHORTCUT_HEAD, "");
 					list_MarketShortcut = str.split(";");
 				}
 			}
@@ -1039,13 +1038,17 @@ public class Launcher extends Activity
 		else if(CustomAppsActivity.current_shortcutHead.equals(CustomAppsActivity.TV_ONLINE_SHORTCUT_HEAD))
 		{
 			onlineTVShortCutList = loadShortcutList(manager, apps, list_onlineTVShortcut);
+			Map<String, Object> map = getAddMap();
+			onlineTVShortCutList.add(map);
 			onlineTVShortcutView.setLayoutView(onlineTVShortCutList, 1);
 			tx_onlineTV_allcount.setText("/" + Integer.toString(onlineTVShortCutList.size()));
 		}
 		else if(CustomAppsActivity.current_shortcutHead.equals(CustomAppsActivity.MARKET_SHORTCUT_HEAD))
 		{
 			MarketShortCutList = loadShortcutList(manager, apps, list_MarketShortcut);
-			marketShortcutView.setLayoutView(onlineTVShortCutList, 1);
+			Map<String, Object> map = getAddMap();
+			MarketShortCutList.add(map);
+			marketShortcutView.setLayoutView(MarketShortCutList, 1);
 			// tx_onlineTV_allcount.setText("/" +
 			// Integer.toString(onlineTVShortCutList.size()));
 		}
@@ -1353,7 +1356,7 @@ public class Launcher extends Activity
 					view.setSurface();
 					break;
 				case 3 :
-					ViewGroup findGridLayout = ((ViewGroup) ((ViewGroup) ((ViewGroup) viewMenu.getCurrentView()).getChildAt(4)).getChildAt(0));
+					ViewGroup findGridLayout = ((ViewGroup) ((ViewGroup) ((ViewGroup) viewMenu.getCurrentView()).getChildAt(3)).getChildAt(0));
 					if (findGridLayout == null) 
 					{
 						Log.d(TAG, "Handle Message findGridLayout = Null");
@@ -1486,7 +1489,7 @@ public class Launcher extends Activity
 					// bad intent
 					return;
 				}
-
+                Log.d(TAG, "BroadcastReceiver = "+ action);
 				updateAllShortcut = true;
 				loadApplications();
 			}

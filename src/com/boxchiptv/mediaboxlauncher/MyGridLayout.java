@@ -77,6 +77,7 @@ public class MyGridLayout extends GridLayout
 
 			ImageView img_bg = (ImageView) view.getChildAt(0);
 			img_bg.setBackgroundResource(parseItemBackground(count, flag));
+			
 			if(m.get("item_type") instanceof Drawable)
 			{
 				int resId = Launcher.parseItemIcon(((ComponentName) m.get("item_symbol")).getPackageName());

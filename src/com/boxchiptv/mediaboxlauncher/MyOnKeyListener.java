@@ -49,7 +49,7 @@ public class MyOnKeyListener implements OnKeyListener
 		if(keyCode != KeyEvent.KEYCODE_BACK)
 			Launcher.isInTouchMode = false;
 
-		Log.d(TAG, "KeyEvent=" + keyCode);
+		//Log.d(TAG, "KeyEvent=" + keyCode);
 
 		if(event.getAction() == KeyEvent.ACTION_DOWN && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER))
 		{
@@ -150,7 +150,7 @@ public class MyOnKeyListener implements OnKeyListener
 			String path = img.getResources().getResourceName(img.getId());
 			String vName = path.substring(path.indexOf("/") + 1);
 
-			if(checkNextFocusedIsNull(view, View.FOCUS_LEFT))
+/*			if(checkNextFocusedIsNull(view, View.FOCUS_LEFT))
 			{
 				Launcher.accessBoundaryCount = 0;
 				Animation animIn = AnimationUtils.loadAnimation(mContext, R.anim.push_left_in);
@@ -161,7 +161,7 @@ public class MyOnKeyListener implements OnKeyListener
 				Launcher.viewMenu.setOutAnimation(animOut);
 				Launcher.viewMenu.showPrevious();
 				return true;
-			}
+			}*/
 
 		}
 		else if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && !Launcher.isShowHomePage)
@@ -170,7 +170,7 @@ public class MyOnKeyListener implements OnKeyListener
 			String path = img.getResources().getResourceName(img.getId());
 			String vName = path.substring(path.indexOf("/") + 1);
 
-			if(checkNextFocusedIsNull(view, View.FOCUS_RIGHT))
+/*			if(checkNextFocusedIsNull(view, View.FOCUS_RIGHT))
 			{
 				Launcher.accessBoundaryCount = 0;
 				Animation animIn = AnimationUtils.loadAnimation(mContext, R.anim.push_right_in);
@@ -181,7 +181,7 @@ public class MyOnKeyListener implements OnKeyListener
 				Launcher.viewMenu.setOutAnimation(animOut);
 				Launcher.viewMenu.showNext();
 				return true;
-			}
+			}*/
 		}
 		return false;
 	}

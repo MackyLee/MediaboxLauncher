@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.MotionEvent;
@@ -73,6 +74,45 @@ public class MyRelativeLayout extends RelativeLayout
 	}
 
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		// TODO Auto-generated method stub
+		switch (keyCode)
+		{
+			case KeyEvent.KEYCODE_DPAD_CENTER :
+//				Log.d(TAG, "KeyEvent.KEYCODE_DPAD_CENTER,Launcher.isShowHomePage= "+Launcher.isShowHomePage);
+//				if(Launcher.isShowHomePage)
+//				{
+//					getCurrentShortcutHead();
+//					if(IsPressedAddButton())
+//					{
+//						CustomAppsActivity.current_shortcutHead = CustomAppsActivity.HOME_SHORTCUT_HEAD;
+//					}
+//				}
+//				Log.d(TAG, "CustomAppsActivity.current_shortcutHead= "+CustomAppsActivity.current_shortcutHead);
+				break;
+			case KeyEvent.KEYCODE_ENTER :
+				// Log.d(TAG, "KeyEvent.KEYCODE_DPAD_CENTER");
+				break;
+			case KeyEvent.KEYCODE_DPAD_UP :
+				// Log.d(TAG, "KeyEvent.KEYCODE_DPAD_UP");
+				break;
+			case KeyEvent.KEYCODE_DPAD_DOWN :
+				// Log.d(TAG, "KeyEvent.KEYCODE_DPAD_DOWN");
+				break;
+			case KeyEvent.KEYCODE_DPAD_LEFT :
+				// Log.d(TAG, "KeyEvent.KEYCODE_DPAD_LEFT");
+				break;
+			case KeyEvent.KEYCODE_DPAD_RIGHT :
+				// Log.d(TAG, "KeyEvent.KEYCODE_DPAD_RIGHT");
+				break;
+			default :
+				break;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		Log.d(TAG, "the component get a toouch at ========================== 0> ");
@@ -102,7 +142,7 @@ public class MyRelativeLayout extends RelativeLayout
 					// "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ touch add");
 					Launcher.isAddButtonBeTouched = true;
 					Launcher.pressedAddButton = this;
-					if (Launcher.isShowHomePage)
+					if(Launcher.isShowHomePage)
 						CustomAppsActivity.current_shortcutHead = CustomAppsActivity.HOME_SHORTCUT_HEAD;
 				}
 			}
@@ -115,17 +155,45 @@ public class MyRelativeLayout extends RelativeLayout
 		return true;
 	}
 
+	protected boolean IsAddButtonSelected()
+	{
+		if(this.getChildAt(0) instanceof ImageView)
+		{
+			ImageView img = (ImageView) this.getChildAt(0);
+			if(img != null && img.getDrawable() != null
+					&& img.getDrawable().getConstantState().equals(mContext.getResources().getDrawable(R.drawable.item_img_add).getConstantState()))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		} else
+		return false;
+	}
 	@Override
 	protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect)
 	{
-		//Log.d(" MyRelativeLayout", "gainFocus=" + gainFocus + "   direction="
-		//+ direction + "  previouslyFocusedRect=" + previouslyFocusedRect);
-		//Log.d(" MyRelativeLayout", "child 0="+ getChildAt(0) + " id ="
-		//+getChildAt(0).getId());
-		//Log.d(" MyRelativeLayout", "child 1="+ getChildAt(1));
-		//Log.d(TAG,"onFocusChanged");
-		//getCurrentShortcutHead();
-          
+		// Log.d(" MyRelativeLayout", "gainFocus=" + gainFocus + "   direction="
+		// + direction + "  previouslyFocusedRect=" + previouslyFocusedRect);
+		// Log.d(" MyRelativeLayout", "child 0="+ getChildAt(0) + " id ="
+		// +getChildAt(0).getId());
+		// Log.d(" MyRelativeLayout", "child 1="+ getChildAt(1));
+		 
+		Log.d(TAG, "onFocusChanged Launcher.isShowHomePage = "+Launcher.isShowHomePage);
+		getCurrentShortcutHead();
+		if(Launcher.isShowHomePage)
+		{			
+			if(IsAddButtonSelected())
+			{
+				CustomAppsActivity.current_shortcutHead = CustomAppsActivity.HOME_SHORTCUT_HEAD;
+				Log.d(TAG, "onFocusChanged, selected button add");
+				Log.d(TAG, "CustomAppsActivity.current_shortcutHead=" + CustomAppsActivity.current_shortcutHead);
+			}
+		}
+		
+		
 		if(gainFocus == true && !Launcher.isInTouchMode && !Launcher.dontDrawFocus)
 		{
 			setNumberOfScreen();
@@ -216,12 +284,16 @@ public class MyRelativeLayout extends RelativeLayout
 		// Log.d("TAG", "Launcher.marketShortcutView.parent=" +
 		// Launcher.marketShortcutView.getParent().toString());
 		// Launcher.findViewById(R.id.layout_focus_unit);
-
-		if(thisview.getId() == R.id.layout_video)// (View) Launcher.videoShortcutView)
+		ViewGroup HomeShorcutGridLayout = null;
+		HomeShorcutGridLayout = (ViewGroup)(thisview.getParent());
+		
+		if(thisview.getId() == R.id.layout_video)// (View)
+													// Launcher.videoShortcutView)
 		{
 			CustomAppsActivity.current_shortcutHead = CustomAppsActivity.VIDEO_SHORTCUT_HEAD;
 		}
-		else if(thisview.getId() == R.id.layout_onlinetv)// (View) Launcher.onlineTVShortcutView)
+		else if(thisview.getId() == R.id.layout_onlinetv)// (View)
+															// Launcher.onlineTVShortcutView)
 		{
 			CustomAppsActivity.current_shortcutHead = CustomAppsActivity.TV_ONLINE_SHORTCUT_HEAD;
 		}
@@ -241,10 +313,10 @@ public class MyRelativeLayout extends RelativeLayout
 		{
 			CustomAppsActivity.current_shortcutHead = CustomAppsActivity.MY_APPLICATIONS;
 		}
-		else
-		// if(Launcher.isShowHomePage)// ==R.id.layout_homepage)
+		else if (HomeShorcutGridLayout.getId() == R.id.gv_shortcut)
 		{
-			//CustomAppsActivity.current_shortcutHead = CustomAppsActivity.INVALID_HEAD;//CustomAppsActivity.HOME_SHORTCUT_HEAD;
+			 CustomAppsActivity.current_shortcutHead = CustomAppsActivity.HOME_SHORTCUT_HEAD;//CustomAppsActivity.HOME_SHORTCUT_HEAD;
+			 //Log.d(TAG, "CustomAppsActivity.current_shortcutHead=" + CustomAppsActivity.current_shortcutHead);
 		}
 
 		// Log.d(TAG, "thisview.getId()=" + thisview.getId() +" " +
@@ -254,7 +326,7 @@ public class MyRelativeLayout extends RelativeLayout
 		// Log.d(TAG,
 		// "View.inflate(mContext, R.layout.homegrid_item, null).getId()=" +
 		// View.inflate(mContext, R.layout.homegrid_item, null).getId());
-		 Log.d(TAG, "current_shortcutHead=" + CustomAppsActivity.current_shortcutHead);
+		Log.d(TAG, "CustomAppsActivity.current_shortcutHead=" + CustomAppsActivity.current_shortcutHead);
 	}
 
 	private void setNumberOfScreen()
